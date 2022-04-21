@@ -897,7 +897,7 @@ const handleLoading=()=>{
 			<Container className="flex-container mt-5 " style={{ display: "flex" }}>
 				<Row>
 					{publicKey && stakedNft?.length > 0 && (
-						<h4 className="lower-content">SolanaSuccubus Staked</h4>
+						<h4 className="lower-content">Succubus's Staked</h4>
 					)}
 					{publicKey && stakedNft?.length > 0 
 						? stakedNft?.map((obj, i) => (
@@ -989,7 +989,7 @@ const handleLoading=()=>{
 						<h4
 							className="lower-content mb-3"
 							style={{ marginTop: "60px" }}>
-							SolanaSuccubus in Wallet
+							Succubus's in Wallet
 						</h4>
 					) : (
 						<>
@@ -1003,13 +1003,13 @@ const handleLoading=()=>{
 							<h4
 							className="lower-content"
 							style={{  marginTop: "60px" }}>
-							Checking SolanaSuccubus in Wallet
+							Checking Succubus's in Wallet
 						</h4>
 						):(
 							<h4
 							className="lower-content"
 							style={{  marginTop: "60px" }}>
-							No SolanaSuccubus in Wallet
+							No Succubus's in Wallet
 						</h4>
 						)}
 						</>
