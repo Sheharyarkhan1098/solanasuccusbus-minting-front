@@ -1,0 +1,91 @@
+html, body {
+  overflow-x: hidden;
+}
+
+body{
+background-color: #0e0f22 !important;
+position:relative;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  @font-face {
+    font-family: "Hipeless brush";
+    src: url(./HipelessBrush-Yz5eO.otf) format("truetype");
+  }
+  @font-face {
+    font-family: "glecb";
+    src: url(./GLECB.TTF) format("truetype");
+  }
+  @font-face {
+    font-family: "cour";
+    src: url(./cour.ttf) format("truetype");
+  }
+
+
+  h2 p{
+    color:white;
+    font-family: cour;
+  
+  }
+  .first-heading{
+    font-family: glecb;
+    text-transform: uppercase;
+  }
+
+ 
+  .container-text{
+    font-family: cour;
+    color:white;
+  margin-top: 40px;
+   /* font-size:25px; */
+    align-self: justify;
+    text-align: justify;
+    line-height: 40px;
+   
+  }
+  @media screen and (min-width: 760px) {
+    .container-text {
+      font-size: 25px;
+    }
+  }
+  
+  @media screen and (max-width: 760px) {
+    .container-text {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 375px) {
+    .robot-image {
+      width: 300px;
+    }
+  }
+
+  .stacked{
+    font-family: glecb;
+    margin-top: 50px;
+    color:white;
+    padding-inline: 14vw;
+   font-size:35px;
+    align-self: center;
+    text-align: center;
+    line-height: 40px;
+  }
+
+
+  #myProgress {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 3px;
+  }
+  
+  #myBar {
+    width: 1%;
+    height: 15px;
+    border-radius: 3px;
+    background-color: red;
+
+  }
