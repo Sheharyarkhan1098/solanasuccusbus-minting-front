@@ -41,7 +41,7 @@ const {
 	u8,
 } = require("@solana/buffer-layout");
 // const baseURL = "http://localhost:3000";
-const baseURL = "http://68.183.6.66:3000";
+const baseURL = "http://64.225.77.239/";
 
 
 export const GetNft = () => {
