@@ -13,13 +13,14 @@ function Calculation(props) {
 	setInterval(()=>{
 
 		 stack_sec=stack_sec+1;
-		setPrize(stack_sec*0.000115741);
+		// setPrize(stack_sec*0.000115741);
+		setPrize(stack_sec*0.000000006);
 		},1000)
 
 
 
   return (
-    <div className="text-white">Reward:{prize && prize.toFixed(4)}{" "}$THUMB</div>
+    <div className="text-white">Reward:{prize && prize.toFixed(8)}{" "}$SOL</div>
   )
 }
 

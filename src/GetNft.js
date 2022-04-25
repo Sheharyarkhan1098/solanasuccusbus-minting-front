@@ -41,7 +41,7 @@ const {
 	u8,
 } = require("@solana/buffer-layout");
 // const baseURL = "http://localhost:3000";
-const baseURL = "http://68.183.6.66:3000";
+const baseURL = "http://64.225.77.239";
 
 
 export const GetNft = () => {
@@ -78,8 +78,8 @@ export const GetNft = () => {
 
 	const checkNFTs = async () => {
 		setMessage("Fetching NFTs....");
-		const connect =    createConnectionConfig(web3.clusterApiUrl("devnet"));
-		// const connect = createConnectionConfig(web3.clusterApiUrl("mainnet-beta"));
+		// const connect =    createConnectionConfig(web3.clusterApiUrl("devnet"));
+		const connect = createConnectionConfig(web3.clusterApiUrl("mainnet-beta"));
 		// const provider = getProvider();
 		let ownerToken = publicKey;
 		// let ownerToken = "7VPjjEj7mukgBf9TqpDxivnu7BNH4rdUmSFUpgvpLvf7";
@@ -99,9 +99,9 @@ export const GetNft = () => {
 		// let cmId = "5dRqRddNxD3tTuuRVVaSWYCErJHSvtZNnm2qtoGxwkYq";
 		// let cmId = "AV22NPCEjGPy7VQwDgLbmThWtt8LfQusqN37neqYGNj3";
 		// let cmId = "5k2EPeEp4ZZaRKdW7uDvTxwoRgYkatk15LEhRPYXhaxD";
-		let cmId = "3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT";
+		// let cmId = "3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT";
 		//mainnet cmid start
-		// let cmId = "2eSLBEzyJpPVUkBHCQeodFZtRPE9S6tRrAXhGnmxNM48";
+		let cmId = "7PMQeqNfYTnJmWqRJ65Ex7rtJCExFGy4bdBhcJhg8GBd";
 		//mainnet cmid end
 
 		console.log(
@@ -202,14 +202,14 @@ export const GetNft = () => {
 		// let program_id = new web3.PublicKey(
 		// 	"3wVscJPJ59dbpmCzkvNEXuYc8EX6hXsQXkBeeTk1sebY"
 		// );
-		let program_id = new web3.PublicKey(
-			"DsxsByt2bmWUdyhJp2hoi6kDzovEoish1FJVX6Lubd96"
-		);
+		// let program_id = new web3.PublicKey(
+		// 	"DsxsByt2bmWUdyhJp2hoi6kDzovEoish1FJVX6Lubd96"
+		// );
 		
 		//miannet
-		// let program_id = new web3.PublicKey(
-		// 	"Bh27em4eRG9GHmvigC6PZ6S1wM7vWRS7JGvP2Zk7pLsF"
-		// );
+		let program_id = new web3.PublicKey(
+			"47Mg4TXCA7pm8ggBoFKez6EFh7Dpvi48evDBJh9n4n8S"
+		);
 		let nftPubkey = new web3.PublicKey(nft);
 		// .then((check) => {
 		// 	console.log("check:", check);
@@ -245,18 +245,18 @@ export const GetNft = () => {
 		// const CANDY_MACHINE_ID = new web3.PublicKey(
 		// 	"5k2EPeEp4ZZaRKdW7uDvTxwoRgYkatk15LEhRPYXhaxD"
 		// );
-		const CANDY_MACHINE_ID = new web3.PublicKey(
-			"3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT"
-		);
-		
-		//mainnet
 		// const CANDY_MACHINE_ID = new web3.PublicKey(
-		// 	"2eSLBEzyJpPVUkBHCQeodFZtRPE9S6tRrAXhGnmxNM48"
+		// 	"3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT"
 		// );
 		
+		//mainnet
+		const CANDY_MACHINE_ID = new web3.PublicKey(
+			"7PMQeqNfYTnJmWqRJ65Ex7rtJCExFGy4bdBhcJhg8GBd"
+		);
+		
 		let connection = new web3.Connection(
-			web3.clusterApiUrl("devnet"),
-			// web3.clusterApiUrl("mainnet-beta"),
+			// web3.clusterApiUrl("devnet"),
+			web3.clusterApiUrl("mainnet-beta"),
 			"confirmed"
 		);
 
@@ -530,14 +530,14 @@ export const GetNft = () => {
 		// let program_id = new web3.PublicKey(
 		// 	"3wVscJPJ59dbpmCzkvNEXuYc8EX6hXsQXkBeeTk1sebY"
 		// );
-		let program_id = new web3.PublicKey(
-			"DsxsByt2bmWUdyhJp2hoi6kDzovEoish1FJVX6Lubd96"
-		);
+		// let program_id = new web3.PublicKey(
+		// 	"DsxsByt2bmWUdyhJp2hoi6kDzovEoish1FJVX6Lubd96"
+		// );
 		
 		// mainnet
-		// let program_id = new web3.PublicKey(
-		// 	"Bh27em4eRG9GHmvigC6PZ6S1wM7vWRS7JGvP2Zk7pLsF"
-		// );
+		let program_id = new web3.PublicKey(
+			"47Mg4TXCA7pm8ggBoFKez6EFh7Dpvi48evDBJh9n4n8S"
+		);
 		
 
 		let nftPubkey = new web3.PublicKey(nft);
@@ -569,19 +569,19 @@ export const GetNft = () => {
 		// const CANDY_MACHINE_ID = new web3.PublicKey(
 		// 	"5k2EPeEp4ZZaRKdW7uDvTxwoRgYkatk15LEhRPYXhaxD"
 		// );
-		const CANDY_MACHINE_ID = new web3.PublicKey(
-			"3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT"
-		);
+		// const CANDY_MACHINE_ID = new web3.PublicKey(
+		// 	"3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT"
+		// );
 		
 		// mainnet
-		// const CANDY_MACHINE_ID = new web3.PublicKey(
-		// 	"2eSLBEzyJpPVUkBHCQeodFZtRPE9S6tRrAXhGnmxNM48"
-		// );
+		const CANDY_MACHINE_ID = new web3.PublicKey(
+			"7PMQeqNfYTnJmWqRJ65Ex7rtJCExFGy4bdBhcJhg8GBd"
+		);
 		
 
 		let connection = new web3.Connection(
-			web3.clusterApiUrl("devnet"),
-			// web3.clusterApiUrl("mainnet-beta"),
+			// web3.clusterApiUrl("devnet"),
+			web3.clusterApiUrl("mainnet-beta"),
 			"confirmed"
 		);
 
@@ -714,7 +714,7 @@ export const GetNft = () => {
 				isWritable: false,
 			}, //Done
 			{ pubkey: stake_data, isSigner: false, isWritable: true }, //Done
-			{ pubkey: vault_pda, isSigner: false, isWritable: false }, //Done
+			{ pubkey: vault_pda, isSigner: false, isWritable: true }, //Done
 			{ pubkey: reward_destanation, isSigner: false, isWritable: true }, //Done
 			{ pubkey: reward_source, isSigner: false, isWritable: true }, //Done
 			{ pubkey: destanation, isSigner: false, isWritable: true }, //Done
