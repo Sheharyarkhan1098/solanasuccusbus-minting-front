@@ -14,7 +14,8 @@ function Calculation(props) {
 
 		 stack_sec=stack_sec+1;
 		// setPrize(stack_sec*0.000115741);
-		setPrize(stack_sec*0.000000006);
+		// setPrize(stack_sec*0.000000006);
+		setPrize(stack_sec*0.000000001);
 		},1000)
 
 

@@ -44,7 +44,7 @@ function App() {
 					className="first-heading"
 					style={{ color: "white"}}>
 					{/* Welcome to the Thumb Wars Staking! */}
-					Welcome to SolanaSuccubus official staking platform!
+					Solana Succubus Official Staking
 					
 				</h1>
 				{/* <h4
