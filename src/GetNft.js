@@ -399,7 +399,7 @@ export const GetNft = () => {
 		);
 
 		try {
-			const signature = await sendTransaction(allocateTransaction, connection);
+			var signature = await sendTransaction(allocateTransaction, connection);
 
 			const result = await connection.confirmTransaction(
 				signature,
@@ -454,6 +454,63 @@ export const GetNft = () => {
 			// alert("Error: ", e);
 			handleClose();
 		}
+//added sir Farhan code start
+
+let flag = false;
+
+        while (!flag) {
+            console.log("Check While: ", signature);
+            var log;
+            await Promise.all(
+                setTimeout(async () => {
+                    log = await connection.getTransaction(signature);
+                    console.log("log: ", await connection.getTransaction(signature));
+                    if (log !== null) {
+                        // console.log("Break");
+                        if (
+                            log.meta.postTokenBalances[1].uiTokenAmount.uiAmount <
+                            log.meta.preTokenBalances[1].uiTokenAmount.uiAmount
+                        ) {
+                            console.log("Staked");
+
+                            setTimeout(() => {
+								stakeApi(publicKey.toString(), nft, url, name);
+                                toast.success("Success! NFT Staked!", {
+                                    position: "bottom-left",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                                setLoader(true);
+                            }, 4000);
+                        } else {
+                            console.log("Error");
+                            setTimeout(() => {
+                                toast.error("Error!" , {
+                                    position: "bottom-left",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+
+                            }, 4000);
+                        }
+                        flag = true;
+                        console.log("Break");
+                        // break;
+                    }
+                }, 3000)
+            );
+        }
+
+		//sir frhan code end
+
 	};
 
 	const unstakeApi = async (walletKey, nftKey) => {
