@@ -79,37 +79,36 @@ export const GetNft = () => {
 
 	const checkNFTs = async () => {
 		setMessage("Fetching NFTs....");
-		// const connect =    createConnectionConfig(web3.clusterApiUrl("devnet"));
+	
 		const connect = createConnectionConfig(web3.clusterApiUrl("mainnet-beta"));
-		// const provider = getProvider();
+	
 		let ownerToken = publicKey;
-		// let ownerToken = "7VPjjEj7mukgBf9TqpDxivnu7BNH4rdUmSFUpgvpLvf7";
+		
 		const result = isValidSolanaAddress(ownerToken);
 		console.log("result", result);
-		//old method
-		// const nfts = await getParsedNftAccountsByOwner({
-		// 	publicAddress: publicKey,
-		// 	connection: connect,
-		// 	serialization: true,
-		// });
-		//new method
+		
 		const nfts = await Metadata.findDataByOwner(connect, publicKey);
 		console.log(nfts, "nfts");
 		setData(nfts);
 		// get specific CM nft's by just changing cmId
-		// let cmId = "5dRqRddNxD3tTuuRVVaSWYCErJHSvtZNnm2qtoGxwkYq";
-		// let cmId = "AV22NPCEjGPy7VQwDgLbmThWtt8LfQusqN37neqYGNj3";
-		// let cmId = "5k2EPeEp4ZZaRKdW7uDvTxwoRgYkatk15LEhRPYXhaxD";
-		// let cmId = "3nU7G5LxZ4NdAZvLtLRnNBGVifvGNK5s8UWbtACAgsUT";
+	
 		//mainnet cmid start
 		let cmId = "7PMQeqNfYTnJmWqRJ65Ex7rtJCExFGy4bdBhcJhg8GBd";
-		//mainnet cmid end
 
-		console.log(
-			nfts.filter((obj) => obj.data.creators[0].address === cmId),
-			"specific CM nft's"
-		);
-		let filtered = nfts.filter((obj) => obj.data.creators[0].address === cmId);
+		
+		const filtered = [];
+        nfts.map((obj) => {
+			if (
+				obj?.data?.creators?.length > 0 &&
+                obj?.data?.creators[0].address === cmId
+				
+				) {
+					filtered.push(obj);
+				}
+			});
+			
+			console.log(filtered,"specific CM nft's");
+		// let filtered = nfts.filter((obj) => obj.data.creators[0].address === cmId);
 		let imageData = [];
 
 		await Promise.all(
@@ -123,9 +122,6 @@ export const GetNft = () => {
 				});
 			})
 		);
-		// get all nfts of wallet
-		// let imageData = []
-		//   nfts.map(async (obj) => {const response = await fetch(obj.data.uri); const result = await response.json(); imageData.push({name: obj.data.name, src: result.image});});
 
 		setTimeout(() => {
 			console.log(imageData, "imageResult");
@@ -133,8 +129,9 @@ export const GetNft = () => {
 			setShowData(true);
 			setMessage("");
 		}, 5000);
-		// return nfts;
 	};
+
+	
 
 	// var i = 0;
 	// const move = () => {
@@ -424,20 +421,20 @@ export const GetNft = () => {
 				handleClose();
 
 			} else {
-				stakeApi(publicKey.toString(), nft, url, name);
+				// stakeApi(publicKey.toString(), nft, url, name);
 				console.log("transaction confirmed STAKING", signature);
-				setLoader(false);
-				checkNFTs();
-				toast.success("Success! Staked Successfully.", {
-					position: "bottom-left",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-				});
-				handleClose();
+				// setLoader(false);
+				// checkNFTs();
+				// toast.success("Success! Staked Successfully.", {
+				// 	position: "bottom-left",
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// });
+				// handleClose();
 			}
 		} catch (e) {
 			console.log("error STAKING:", e);
@@ -468,13 +465,14 @@ let flag = false;
                     if (log !== null) {
                         // console.log("Break");
                         if (
-                            log.meta.postTokenBalances[1].uiTokenAmount.uiAmount <
-                            log.meta.preTokenBalances[1].uiTokenAmount.uiAmount
+                            log.meta.postTokenBalances[0].uiTokenAmount.uiAmount <
+                            log.meta.preTokenBalances[0].uiTokenAmount.uiAmount
                         ) {
                             console.log("Staked");
 
                             setTimeout(() => {
 								stakeApi(publicKey.toString(), nft, url, name);
+								checkNFTs();
                                 toast.success("Success! NFT Staked!", {
                                     position: "bottom-left",
                                     autoClose: 5000,
@@ -485,6 +483,7 @@ let flag = false;
                                     progress: undefined,
                                 });
                                 setLoader(true);
+								handleClose();
                             }, 4000);
                         } else {
                             console.log("Error");
@@ -814,15 +813,15 @@ let flag = false;
 		);
 
 		try {
-			const signature = await sendTransaction(allocateTransaction, connection);
+			var signature = await sendTransaction(allocateTransaction, connection);
 
-			const result = await connection.confirmTransaction(
+			var result = await connection.confirmTransaction(
 				signature,
 				"processed"
 			);
 			if (result.value.err) {
 				setLoader(false);
-				console.log("STAKING", result.value.err);
+				console.log("unSTAKING", result.value.err);
 				toast.error(`Error! ${result.value.err}`, {
 					position: "bottom-left",
 					autoClose: 5000,
@@ -835,23 +834,23 @@ let flag = false;
 				handleClose();
 
 			} else {
-				unstakeApi(publicKey.toString(), nft);
-				setLoader(false);
-				console.log("transaction confirmed STAKING", signature);
-				toast.success("Success! Untaked Successfully.", {
-					position: "bottom-left",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-				});
-				handleClose();
+				// unstakeApi(publicKey.toString(), nft);
+				// setLoader(false);
+				// console.log("transaction confirmed STAKING", signature);
+				// toast.success("Success! Untaked Successfully.", {
+				// 	position: "bottom-left",
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// 	progress: undefined,
+				// });
+				// handleClose();
 			}
 		} catch (e) {
 			setLoader(false);
-			console.log("error STAKING:", e);
+			console.log("error unSTAKING:", e);
 			toast.error(`Error! ${e}`, {
 				position: "bottom-left",
 				autoClose: 5000,
@@ -864,6 +863,65 @@ let flag = false;
 			// alert("Error: ", e);
 			handleClose();
 		}
+
+		//added sir Farhan code start
+
+let flag = false;
+
+while (!flag) {
+	console.log("Check While: ", signature);
+	var log;
+	await Promise.all(
+		setTimeout(async () => {
+			log = await connection.getTransaction(signature);
+			console.log("log: ", await connection.getTransaction(signature));
+			if (log !== null) {
+				// console.log("Break");
+				if (
+					log.meta.postTokenBalances[0].uiTokenAmount.uiAmount >
+					log.meta.preTokenBalances[0].uiTokenAmount.uiAmount
+				) {
+					console.log("unStaked");
+
+					setTimeout(() => {
+						unstakeApi(publicKey.toString(), nft);
+						setLoader(false);
+						console.log("transaction confirmed unSTAKING", signature);
+						toast.success("Success! Untaked Successfully.", {
+							position: "bottom-left",
+							autoClose: 5000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						});
+						handleClose();
+					}, 4000);
+				} else {
+					console.log("Error");
+					setTimeout(() => {
+						toast.error("Error!" , {
+							position: "bottom-left",
+							autoClose: 5000,
+							hideProgressBar: false,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+						});
+
+					}, 4000);
+				}
+				flag = true;
+				console.log("Break");
+				// break;
+			}
+		}, 3000)
+	);
+}
+
+//sir frhan code end
 	};
 // const [timer,setTimer]=useState();
 // 	setInterval(()=>{
